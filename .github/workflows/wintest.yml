@@ -40,5 +40,8 @@ jobs:
           echo "executables: {cli_test: }" >> cli_test/pubspec.yaml
           dart pub global activate cli_test --source=path
           cat C:\Users\runneradmin\.pub-cache\bin\cli_test.bat
+          certutil -hashfile "C:\Users\runneradmin\.pub-cache\bin\cli_test.bat" SHA1
           cli_test --version
+          certutil -hashfile "C:\Users\runneradmin\.pub-cache\bin\cli_test.bat" SHA1
           cat C:\Users\runneradmin\.pub-cache\bin\cli_test.bat
+          cli_test --version
