@@ -1,0 +1,44 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - wintest
+    paths:
+      - '.github/workflows/test_win.yml'
+
+name: Test Pipeline
+
+jobs:
+  test1:
+    name: Global Cli Test
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - uses: dart-lang/setup-dart@v1.3
+
+      - name: Run
+        run: |
+          dart create -t cli cli_test
+          echo "executables: {cli_test: }" >> cli_test/pubspec.yaml
+          dart pub global activate cli_test --source=path
+          dart pub global run cli_test --version
+
+  test2:
+    name: Standalone Cli Test
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - uses: dart-lang/setup-dart@v1.3
+
+      - name: Run
+        run: |
+          dart create -t cli cli_test
+          echo "executables: {cli_test: }" >> cli_test/pubspec.yaml
+          dart pub global activate cli_test --source=path
+          cat C:\Users\runneradmin\.pub-cache\bin\cli_test.bat
+          cli_test --version
+          cat C:\Users\runneradmin\.pub-cache\bin\cli_test.bat
